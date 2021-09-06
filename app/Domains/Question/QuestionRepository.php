@@ -2,7 +2,7 @@
 
 
 namespace App\Domains\Question;
-use App\Domains\Question\DatabaseDrivers\DatabaseCSV;
+use App\Domains\Question\DatabaseDrivers\{DatabaseCSV, DatabaseJSON};
 
 class QuestionRepository
 {
