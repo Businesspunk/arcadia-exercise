@@ -15,5 +15,6 @@ use App\Http\Controllers\QuestionController;
 */
 
 Route::prefix('questions')->group(function () {
-    Route::get('/', [QuestionController::class, 'getAllApi']);
+    Route::get('/', [QuestionController::class, 'getAll']);
+    Route::post('/', [QuestionController::class, 'create']);
 });
