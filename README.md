@@ -14,7 +14,7 @@ This is an exercise project for Arcadia company.
 
 The system has been developed with aims to be extended or changed in the future,
 so it has flexible database drivers to handle different types of storage.
-For now, there are (JSON File, CSV File). You can easily switch them in App/Domains/Question/QuestionRepository.php, 
+For now, they can accept JSON and CSV files. You can easily switch them in App/Domains/Question/QuestionRepository.php, 
 just pass to $dbDriver needed driver.
 
 The source database files in the app storage: storage/app/questions.
