@@ -6,7 +6,7 @@ This is an exercise project for Arcadia company.
 
 1. Clone this repository
 2. Run "composer install"
-3. Run "npm run prod"
+3. Run "npm install", "npm run prod"
 4. Setup database connection in .env and run "php artisan migrate"
 5. Make sure for redirection from "/" to "/public" (For Apache .htaccess already set up)
 

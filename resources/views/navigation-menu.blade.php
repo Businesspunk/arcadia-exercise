@@ -23,8 +23,8 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+            <x-jet-responsive-nav-link href="{{ route('questions.all') }}" :active="request()->routeIs('questions.all')">
+                {{ __('Questions') }}
             </x-jet-responsive-nav-link>
         </div>
     </div>
