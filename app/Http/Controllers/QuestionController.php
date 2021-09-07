@@ -28,7 +28,15 @@ class QuestionController extends Controller
         $content = (new QuestionRepository())->get();
         $questionList = QuestionCreator::create($content);
 
-        $questionList->translate($request->lang);
+        try {
+            $questionList->translate($request->lang);
+        } catch (\Exception $e) {
+            if( $isApi ){
+                return Response::json(['code' => 500, 'message' => 'Translate error'], 500);
+            }else{
+                abort(500);
+            }
+        }
 
         if ($isApi) {
             return $questionList->toArray();
