@@ -74,7 +74,7 @@ class QuestionController extends Controller
         $questionRepository->save($questionList->toArray());
 
         if( $isApi ){
-            return $questionList->toArray();
+            return last($questionList->toArray());
         }else{
             return redirect()->route('questions.all', ['lang' => 'en']);
         }
