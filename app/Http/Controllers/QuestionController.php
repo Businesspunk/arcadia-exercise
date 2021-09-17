@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\{Response, Validator};
 
 class QuestionController extends Controller
 {
+    protected $questionRepository;
+
+    public function __construct( QuestionRepository $questionRepository )
+    {
+        $this->questionRepository = $questionRepository;
+    }
+
     public function getAll(Request $request)
     {
         $isApi = $request->is('api/*');
@@ -25,11 +32,11 @@ class QuestionController extends Controller
             }
         }
 
-        $content = (new QuestionRepository())->get();
+        $content = $this->questionRepository->get();
         $questionList = QuestionCreator::create($content);
 
         try {
-            $questionList->translate($request->lang);
+            //$questionList->translate($request->lang);
         } catch (\Exception $e) {
             if( $isApi ){
                 return Response::json(['code' => 500, 'message' => 'Translate error'], 500);
@@ -67,9 +74,7 @@ class QuestionController extends Controller
             }
         }
 
-        $questionRepository = new QuestionRepository();
-        $content = $questionRepository->get();
-
+        $content = $this->questionRepository->get();
         $questionList = QuestionCreator::create($content);
 
         $question = QuestionCreator::createQuestion(
@@ -79,7 +84,7 @@ class QuestionController extends Controller
         );
 
         $questionList->addItem($question);
-        $questionRepository->save($questionList->toArray());
+        $this->questionRepository->save($questionList->toArray());
 
         if( $isApi ){
             return last($questionList->toArray());

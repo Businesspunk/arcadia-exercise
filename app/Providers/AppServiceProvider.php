@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Domains\Question\QuestionRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +14,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->when(QuestionRepository::class)
+            ->needs('$db_type')
+            ->give(env('QUESTION_DATABASE_TYPE'));
     }
 
     /**

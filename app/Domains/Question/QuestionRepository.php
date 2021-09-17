@@ -2,21 +2,35 @@
 
 
 namespace App\Domains\Question;
-use App\Domains\Question\DatabaseDrivers\{DatabaseCSV, DatabaseJSON};
+
+use App\Domains\Question\DatabaseDrivers\{DatabaseCSV, DatabaseJSON, DatabaseInterface};
+use Exception;
 
 class QuestionRepository
 {
-    public $dbDriver = DatabaseCSV::class;
+    protected DatabaseInterface $dbDriver;
+
+    public function __construct($db_type)
+    {
+        switch ($db_type) {
+            case "CSV":
+                $this->dbDriver = new DatabaseCSV;
+                break;
+            case "JSON":
+                $this->dbDriver = new DatabaseJSON;
+                break;
+            default:
+                throw new Exception("Undefined question database type");
+        }
+    }
 
     public function get()
     {
-        $driver = new $this->dbDriver;
-        return $driver->get();
+        return $this->dbDriver->get();
     }
 
     public function save(array $content)
     {
-        $driver = new $this->dbDriver;
-        $driver->save($content);
+        $this->dbDriver->save($content);
     }
 }
